@@ -27,12 +27,16 @@ Values
 
 -- 1-2 修改：用 Email 找到 李燕容、肌肉棒子、Q太郎，如果他的 Role 為 USER 將他的 Role 改為 COACH
 
-Update "USER"
-Set "role" = 'COACH' 
-Where email in 
-('lee2000@hexschooltest.io',
-'muscle@hexschooltest.io',
-'starplatinum@hexschooltest.io' )
+update "USER"
+set "role"  = 'COACH'
+where email in (
+	Select email 
+	From  "USER" 
+	Where  "name"  in
+	('李燕容',
+	'肌肉棒子',
+	'Q太郎')
+)
 and "role" = 'USER';
 
 -- 1-3 刪除：刪除USER 資料表中，用 Email 找到透明人，並刪除該筆資料
