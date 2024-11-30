@@ -132,6 +132,34 @@ values
     -- 2. 教練`肌肉棒子` 需要有 `瑜伽` 專長
     -- 3. 教練`Q太郎` 需要有 `有氧運動` 與 `復健訓練` 專長
 
+insert  into 
+	"COACH_LINK_SKILL"(coach_id, skill_id)
+values
+	(
+		(select c.id from "COACH" c join "USER" u  on c.user_id  = u.id where name = '李燕容'),
+		(select s.id from "SKILL" s where name = '重訓')	
+	),
+	(
+		(select c.id from "COACH" c join "USER" u  on c.user_id  = u.id where name = '肌肉棒子'),
+		(select s.id from "SKILL" s where name = '重訓')	
+	),
+	(
+		(select c.id from "COACH" c join "USER" u  on c.user_id  = u.id where name = '肌肉棒子'),
+		(select s.id from "SKILL" s where name = '瑜伽')	
+	),
+	(
+		(select c.id from "COACH" c join "USER" u  on c.user_id  = u.id where name = 'Q太郎'),
+		(select s.id from "SKILL" s where name = '重訓')	
+	),
+	(
+		(select c.id from "COACH" c join "USER" u  on c.user_id  = u.id where name = 'Q太郎'),
+		(select s.id from "SKILL" s where name = '有氧運動')	
+	),
+	(
+		(select c.id from "COACH" c join "USER" u  on c.user_id  = u.id where name = 'Q太郎'),
+		(select s.id from "SKILL" s where name = '復健訓練')	
+	);
+
 -- 3-3 修改：更新教練的經驗年數，資料需求如下：
     -- 1. 教練`肌肉棒子` 的經驗年數為3年
     -- 2. 教練`Q太郎` 的經驗年數為5年
