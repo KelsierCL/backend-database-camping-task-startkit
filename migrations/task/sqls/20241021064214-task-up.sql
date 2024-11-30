@@ -175,6 +175,15 @@ where c.user_id = (select u.id from "USER" u where u.name = 'Q太郎');
 
 -- 3-4 刪除：新增一個專長 空中瑜伽 至 SKILL 資料表，之後刪除此專長。
 
+Insert into 
+	"SKILL" (name)
+values 	
+	('空中瑜伽');
+
+Delete 
+From "SKILL" 
+Where  name = '空中瑜伽';
+
 
 --  ████████  █████   █    █   █ 
 --    █ █   ██    █  █     █   █ 
