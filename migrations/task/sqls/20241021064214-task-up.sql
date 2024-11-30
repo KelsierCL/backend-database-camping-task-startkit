@@ -164,6 +164,15 @@ values
     -- 1. 教練`肌肉棒子` 的經驗年數為3年
     -- 2. 教練`Q太郎` 的經驗年數為5年
 
+Update "COACH" c
+set experience_years = 3
+where c.user_id = (select u.id from "USER" u where u.name = '肌肉棒子');
+
+Update "COACH" c
+set experience_years = 5
+where c.user_id = (select u.id from "USER" u where u.name = 'Q太郎');
+
+
 -- 3-4 刪除：新增一個專長 空中瑜伽 至 SKILL 資料表，之後刪除此專長。
 
 
