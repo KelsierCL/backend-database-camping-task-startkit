@@ -275,6 +275,17 @@ VALUES(
     -- 2. 預約時間`booking_at` 設為2024-11-24 17:10:25
     -- 3. 狀態`status` 設定為即將授課
 
+	INSERT INTO public."COURSE_BOOKING"
+		(id, user_id, course_id, booking_at, status,  created_at)
+	VALUES(
+		gen_random_uuid(), 
+		( select u.id from "USER" u where u.name = '王小明' ), 
+		( select c.id from "COURSE" c where c.name = '重訓基礎課'), 
+		'2024-11-24 17:10:25', 
+		'即將授課', 	
+		CURRENT_TIMESTAMP	
+	);
+
 -- 5-4. 查詢：取得王小明所有的預約紀錄，包含取消預約的紀錄
 
 -- 5-5. 修改：`王小明` 現在已經加入直播室了，請在`COURSE_BOOKING`更新該筆預約資料（請注意，不要更新到已經取消的紀錄）：
