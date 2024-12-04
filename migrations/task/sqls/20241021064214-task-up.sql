@@ -311,13 +311,16 @@ VALUES(
 	);
 
 -- 5-6. 查詢：計算用戶王小明的購買堂數，顯示須包含以下欄位： user_id , total。 (需使用到 SUM 函式與 Group By)
-	SELECT u.id AS user_id, 
-		sum(cp.purchased_credits) AS Total
+	SELECT cp.user_id, 
+		sum(cp.purchased_credits) AS total
 	FROM  "CREDIT_PURCHASE" cp 
-	JOIN "USER" u ON cp.user_id  = u.id 
-	JOIN "CREDIT_PACKAGE" cp2 ON cp.credit_package_id = cp2.id 
+	JOIN "USER" u 
+		ON cp.user_id  = u.id 
+	JOIN "CREDIT_PACKAGE" cp2 
+		ON cp.credit_package_id = cp2.id 
 	WHERE u.name = '王小明'
-	GROUP BY u.id;
+	GROUP BY cp.user_id;
+
 
 -- 5-7. 查詢：計算用戶王小明的已使用堂數，顯示須包含以下欄位： user_id , total。 (需使用到 Count 函式與 Group By)
 
