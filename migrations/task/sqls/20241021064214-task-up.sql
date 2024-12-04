@@ -230,10 +230,32 @@ VALUES(
         -- 1. 預約人設為`王小明`
         -- 2. 預約時間`booking_at` 設為2024-11-24 16:00:00
         -- 3. 狀態`status` 設定為即將授課
+
+	INSERT INTO public."COURSE_BOOKING"
+	(id, user_id, course_id, booking_at, status,  created_at)
+	VALUES(
+		gen_random_uuid(), 
+		( select u.id from "USER" u where u.name = '王小明' ), 
+		( select c.id from "COURSE" c where c.name = '重訓基礎課'), 
+		'2024-11-24 16:00:00', 
+		'即將授課', 	
+		CURRENT_TIMESTAMP	
+	);		
     -- 2. 新增： `好野人` 預約 `李燕容` 的課程
         -- 1. 預約人設為 `好野人`
         -- 2. 預約時間`booking_at` 設為2024-11-24 16:00:00
         -- 3. 狀態`status` 設定為即將授課
+
+	INSERT INTO public."COURSE_BOOKING"
+	(id, user_id, course_id, booking_at, status,  created_at)
+	VALUES(
+		gen_random_uuid(), 
+		( select u.id from "USER" u where u.name = '好野人' ), 
+		( select c.id from "COURSE" c where c.name = '重訓基礎課'), 
+		'2024-11-24 16:00:00', 
+		'即將授課', 	
+		CURRENT_TIMESTAMP	
+	);
 
 -- 5-2. 修改：`王小明`取消預約 `李燕容` 的課程，請在`COURSE_BOOKING`更新該筆預約資料：
     -- 1. 取消預約時間`cancelled_at` 設為2024-11-24 17:00:00
