@@ -261,6 +261,15 @@ VALUES(
     -- 1. 取消預約時間`cancelled_at` 設為2024-11-24 17:00:00
     -- 2. 狀態`status` 設定為課程已取消
 
+	update  "COURSE_BOOKING" 
+	SET cancelled_at = '2024-11-24 17:00:00' 
+		, status = '課程已取消'
+	where user_id = (
+		select u.id
+		from "USER" u 
+		where u.name = '王小明'
+	);
+
 -- 5-3. 新增：`王小明`再次預約 `李燕容`   的課程，請在`COURSE_BOOKING`新增一筆資料：
     -- 1. 預約人設為`王小明`
     -- 2. 預約時間`booking_at` 設為2024-11-24 17:10:25
