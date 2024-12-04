@@ -287,6 +287,16 @@ VALUES(
 	);
 
 -- 5-4. 查詢：取得王小明所有的預約紀錄，包含取消預約的紀錄
+	SELECT  c.name AS "課程名稱"
+	, cb.booking_at AS "課程預約時間"
+	, cb.status AS "課程狀態"
+	, cb.cancelled_at  AS "課程取消時間"
+	, cb.created_at  AS "預約資料建立時間"
+	, u.name AS "學生姓名"
+	FROM "COURSE_BOOKING" cb 
+	JOIN "USER" u  ON cb.user_id = u.id 
+	JOIN "COURSE" c ON cb.course_id = c.id 
+	WHERE u.name = '王小明';
 
 -- 5-5. 修改：`王小明` 現在已經加入直播室了，請在`COURSE_BOOKING`更新該筆預約資料（請注意，不要更新到已經取消的紀錄）：
     -- 1. 請在該筆預約記錄他的加入直播室時間 `join_at` 設為2024-11-25 14:01:59
