@@ -323,6 +323,17 @@ VALUES(
 
 
 -- 5-7. 查詢：計算用戶王小明的已使用堂數，顯示須包含以下欄位： user_id , total。 (需使用到 Count 函式與 Group By)
+	SELECT cb.user_id, 
+		count(cb.*) AS total
+	FROM "COURSE_BOOKING" cb 
+	JOIN "USER" u  
+		ON cb.user_id = u.id 
+	JOIN "COURSE" c 
+		ON cb.course_id = c.id 
+	WHERE u.name = '王小明'
+	AND  cb.status <> '課程已取消'
+	GROUP BY cb.user_id;
+
 
 -- 5-8. [挑戰題] 查詢：請在一次查詢中，計算用戶王小明的剩餘可用堂數，顯示須包含以下欄位： user_id , remaining_credit
     -- 提示：
