@@ -342,6 +342,35 @@ VALUES(
     -- inner join ( 用戶王小明的已使用堂數) as "COURSE_BOOKING"
     -- on "COURSE_BOOKING".user_id = "CREDIT_PURCHASE".user_id;
 
+	select ("CREDIT_PURCHASE".total_credit - "COURSE_BOOKING".used_credit) as remaining_credit, "CREDIT_PURCHASE".user_id 
+	from (  
+		SELECT cp.user_id, 
+			sum(cp.purchased_credits) AS total_credit
+		FROM  "CREDIT_PURCHASE" cp 
+		JOIN "USER" u 
+			ON cp.user_id  = u.id 
+		JOIN "CREDIT_PACKAGE" cp2 
+			ON cp.credit_package_id = cp2.id 
+		WHERE u.name = '王小明'
+		GROUP BY cp.user_id 
+	
+	) as "CREDIT_PURCHASE"
+	inner join (
+	
+		SELECT cb.user_id, 
+			count(cb.*) AS used_credit
+		FROM "COURSE_BOOKING" cb 
+		JOIN "USER" u  
+			ON cb.user_id = u.id 
+		JOIN "COURSE" c 
+			ON cb.course_id = c.id 
+		WHERE u.name = '王小明'
+		AND  cb.status <> '課程已取消'
+		GROUP BY cb.user_id 
+	
+	) as "COURSE_BOOKING"
+	on "COURSE_BOOKING".user_id = "CREDIT_PURCHASE".user_id;
+
 
 -- ████████  █████   █     ███  
 --   █ █   ██    █  █     █     
