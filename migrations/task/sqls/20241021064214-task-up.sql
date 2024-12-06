@@ -390,10 +390,21 @@ VALUES(
 	JOIN "COACH_LINK_SKILL" cls ON c.id = cls.coach_id 
 	JOIN "SKILL" s ON cls.skill_id  = s.id 
 	WHERE s.name = '重訓'
-	ORDER BY experience_years DESC 
+	ORDER BY experience_years DESC; 
 
 -- 6-2 查詢：查詢每種專長的教練數量，並只列出教練數量最多的專長（需使用 group by, inner join 與 order by 與 limit 語法）
 -- 顯示須包含以下欄位： 專長名稱, coach_total
+	SELECT  *
+	FROM (
+		SELECT  s.name AS 專長名稱, 
+		count(*)  coach_total
+		FROM "COACH_LINK_SKILL" cls
+		JOIN "SKILL" s  ON s.id = cls.skill_id
+		GROUP BY s.name
+	)  SkillStatistic
+	ORDER BY coach_total DESC 
+	LIMIT 1;
+
 
 -- 6-3. 查詢：計算 11 月份組合包方案的銷售數量
 -- 顯示須包含以下欄位： 組合包方案名稱, 銷售數量
