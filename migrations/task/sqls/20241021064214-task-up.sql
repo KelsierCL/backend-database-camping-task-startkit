@@ -424,3 +424,8 @@ VALUES(
 
 -- 6-5. 查詢：計算 11 月份有預約課程的會員人數（需使用 Distinct，並用 created_at 和 status 欄位統計）
 -- 顯示須包含以下欄位： 預約會員人數
+	SELECT count(DISTINCT user_id) AS 預約會員人數
+	FROM  "COURSE_BOOKING" cb 
+	WHERE  created_at BETWEEN '2024-12-01' AND '2024-12-31'
+	AND status  <> '課程已取消';
+
